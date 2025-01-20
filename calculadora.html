@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Valor Total de Cédulas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        footer {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Valor Total de Cédulas</h1>
+        <table>
+            <tr>
+                <th>Denominação</th>
+                <th>Quantidade</th>
+                <th>Valor</th>
+            </tr>
+            <tr>
+                <td>R$ 2,00</td>
+                <td><input id="quantidade_cedulas_2" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_2">R$ 0,00</span></td>
+            </tr>
+            <tr>
+                <td>R$ 5,00</td>
+                <td><input id="quantidade_cedulas_5" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_5">R$ 0,00</span></td>
+            </tr>
+            <tr>
+                <td>R$ 10,00</td>
+                <td><input id="quantidade_cedulas_10" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_10">R$ 0,00</span></td>
+            </tr>
+            <tr>
+                <td>R$ 20,00</td>
+                <td><input id="quantidade_cedulas_20" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_20">R$ 0,00</span></td>
+            </tr>
+            <tr>
+                <td>R$ 50,00</td>
+                <td><input id="quantidade_cedulas_50" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_50">R$ 0,00</span></td>
+            </tr>
+            <tr>
+                <td>R$ 100,00</td>
+                <td><input id="quantidade_cedulas_100" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_100">R$ 0,00</span></td>
+            </tr>
+            <tr>
+                <td>R$ 200,00</td>
+                <td><input id="quantidade_cedulas_200" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_200">R$ 0,00</span></td>
+            </tr>
+        </table>
+        <div class="result">
+            <span id="resultado_total">Valor Total: R$ 0,00</span>
+        </div>
+        <footer>
+            Desenvolvido por Carlos Oliveira
+        </footer>
+    </div>
+
+    <script>
+        function formatarQuantidade(input) {
+            let valor = input.value.replace(/\D/g, '');
+            input.value = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        function calcularTotal(input) {
+            formatarQuantidade(input);
+            const valores = {
+                2: parseInt(document.getElementById('quantidade_cedulas_2').value.replace(/\./g, '')) || 0,
+                5: parseInt(document.getElementById('quantidade_cedulas_5').value.replace(/\./g, '')) || 0,
+                10: parseInt(document.getElementById('quantidade_cedulas_10').value.replace(/\./g, '')) || 0,
+                20: parseInt(document.getElementById('quantidade_cedulas_20').value.replace(/\./g, '')) || 0,
+                50: parseInt(document.getElementById('quantidade_cedulas_50').value.replace(/\./g, '')) || 0,
+                100: parseInt(document.getElementById('quantidade_cedulas_100').value.replace(/\./g, '')) || 0,
+                200: parseInt(document.getElementById('quantidade_cedulas_200').value.replace(/\./g, '')) || 0
+            };
+
+            const totais = {
+                2: valores[2] * 2,
+                5: valores[5] * 5,
+                10: valores[10] * 10,
+                20: valores[20] * 20,
+                50: valores[50] * 50,
+                100: valores[100] * 100,
+                200: valores[200] * 200
+            };
+
+            const total = totais[2] + totais[5] + totais[10] + totais[20] + totais[50] + totais[100] + totais[200];
+
+            document.getElementById('resultado_2').innerText = `R$ ${totais[2].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            document.getElementById('resultado_5').innerText = `R$ ${totais[5].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            document.getElementById('resultado_10').innerText = `R$ ${totais[10].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            document.getElementById('resultado_20').innerText = `R$ ${totais[20].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            document.getElementById('resultado_50').innerText = `R$ ${totais[50].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            document.getElementById('resultado_100').innerText = `R$ ${totais[100].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            document.getElementById('resultado_200').innerText = `R$ ${totais[200].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            document.getElementById('resultado_total').innerText = `Valor Total: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        }
+
+        document.querySelectorAll('input[type="text"]').forEach(input => {
+            input.addEventListener('input', function() {
+                calcularTotal(this);
+            });
+        });
+    </script>
+</body>
+</html>
