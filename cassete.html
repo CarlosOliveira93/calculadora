@@ -1,0 +1,238 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Cassetes e Cédulas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .main-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1400px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .result, .resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #d9534f;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Primeira Calculadora -->
+        <div class="container">
+            <h1>Calculadora de Valor Total de Cédulas 1</h1>
+            <form oninput="calcularTotal1()">
+                <table>
+                    <tr>
+                        <th>NCR</th>
+                        <th>Quantidade de Cédulas (fixo)</th>
+                        <th>Quantidade de Cassetes</th>
+                        <th>Subtotal</th>
+                    </tr>
+                    <tr>
+                        <td>R$ 2,00</td>
+                        <td>1200</td>
+                        <td><input type="number" id="qtdCassetes2"></td>
+                        <td><span class="resultado" id="resultado2"></span></td>
+                    </tr>
+                    <tr>
+                        <td>R$ 5,00</td>
+                        <td>1200</td>
+                        <td><input type="number" id="qtdCassetes5"></td>
+                        <td><span class="resultado" id="resultado5"></span></td>
+                    </tr>
+                    <tr>
+                        <td>R$ 10,00</td>
+                        <td>1200</td>
+                        <td><input type="number" id="qtdCassetes10"></td>
+                        <td><span class="resultado" id="resultado10"></span></td>
+                    </tr>
+                    <tr>
+                        <td>R$ 20,00</td>
+                        <td>1500</td>
+                        <td><input type="number" id="qtdCassetes20"></td>
+                        <td><span class="resultado" id="resultado20"></span></td>
+                    </tr>
+                    <tr>
+                        <td>R$ 50,00</td>
+                        <td>2000</td>
+                        <td><input type="number" id="qtdCassetes50"></td>
+                        <td><span class="resultado" id="resultado50"></span></td>
+                    </tr>
+                    <tr>
+                        <td>R$ 100,00</td>
+                        <td>2000</td>
+                        <td><input type="number" id="qtdCassetes100"></td>
+                        <td><span class="resultado" id="resultado100"></span></td>
+                    </tr>
+                    <tr>
+                        <td>R$ 200,00</td>
+                        <td>1500</td>
+                        <td><input type="number" id="qtdCassetes200"></td>
+                        <td><span class="resultado" id="resultado200"></span></td>
+                    </tr>
+                </table>
+            </form>
+            <div class="result">
+                <p id="resultadoTotal"></p>
+            </div>
+            <footer>
+                Calculadora de Valor Total de Cédulas 1
+            </footer>
+        </div>
+
+        <!-- Segunda Calculadora -->
+        <div class="container">
+            <h1>Calculadora de Valor Total de Cédulas 2</h1>
+            <form oninput="calcularTotal2()">
+                <table>
+                    <tr>
+                        <th>DIEBOLD</th>
+                        <th>Quantidade de Cédulas (fixo)</th>
+                        <th>Quantidade de Cassetes</th>
+                        <th>Subtotal</th>
+                    </tr>
+                    <tr>
+                        <td>R$ 2,00</td>
+                        <td>1200</td>
+                        <td><input type="number" id="qtdCassetes2_2"></td>
+                        <td><span class="resultado" id="resultado2_2"></span></td>
+                    </tr>
+                    <tr>
+                        <td>R$ 5,00</td>
+                        <td>1200</td>
+                        <td><input type="number" id="qtdCassetes5_2"></td>
+                        <td><span class="resultado" id="resultado5_2"></span></td>
+                    </tr>
+                    <tr>
+                        <td>R$ 10,00</td>
+                        <td>2200</td>
+                        <td><input type="number" id="qtdCassetes10_2"></td>
+                        <td><span class="resultado" id="resultado10_2"></span></td>
+                    </tr>
+                    <tr>
+                        <td>R$ 20,00</td>
+                        <td>2200</td>
+                        <td><input type="number" id="qtdCassetes20_2"></td>
+                        <td><span class="resultado" id="resultado20_2"></span></td>
+                    </tr>
+                    <tr>
+                        <td>R$ 50,00</td>
+                        <td>2400</td>
+                        <td><input type="number" id="qtdCassetes50_2"></td>
+                        <td><span class="resultado" id="resultado50_2"></span></td>
+                    </tr>
+                    <tr>
+                        <td>R$ 100,00</td>
+                        <td>2400</td>
+                        <td><input type="number" id="qtdCassetes100_2"></td>
+                        <td><span class="resultado" id="resultado100_2"></span></td>
+                    </tr>
+                    <tr>
+                        <td>R$ 200,00</td>
+                        <td>3000</td>
+                        <td><input type="number" id="qtdCassetes200_2"></td>
+                        <td><span class="resultado" id="resultado200_2"></span></td>
+                    </tr>
+                </table>
+            </form>
+            <div class="result">
+                <p id="resultadoTotal_2"></p>
+            </div>
+            <footer>
+                Calculadora de Valor Total de Cédulas 2
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function calcularTotal1() {
+            var valores = [2, 5, 10, 20, 50, 100, 200];
+            var quantidades = {2: 1200, 5: 1200, 10: 1200, 20: 1500, 50: 2000, 100: 2000, 200: 1500};
+            var total = 0;
+    
+            valores.forEach(function(valor) {
+                var qtdCedulas = quantidades[valor];
+                var qtdCassetes = parseInt(document.getElementById("qtdCassetes" + valor).value) || 0;
+                var subtotal = valor * qtdCedulas * qtdCassetes;
+                total += subtotal;
+    
+                document.getElementById("resultado" + valor).textContent = "R$ " + subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            });
+    
+            document.getElementById("resultadoTotal").textContent = "Total: R$ " + total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+    
+        function calcularTotal2() {
+            var valores = [2, 5, 10, 20, 50, 100, 200];
+            var quantidades = {2: 1200, 5: 1400, 10: 2000, 20: 1200, 50: 2400, 100: 2400, 200: 2200};
+            var total = 0;
+    
+            valores.forEach(function(valor) {
+                var qtdCedulas = quantidades[valor];
+                var qtdCassetes = parseInt(document.getElementById("qtdCassetes" + valor + "_2").value) || 0;
+                var subtotal = valor * qtdCedulas * qtdCassetes;
+                total += subtotal;
+    
+                document.getElementById("resultado" + valor + "_2").textContent = "R$ " + subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            });
+    
+            document.getElementById("resultadoTotal_2").textContent = "Total: R$ " + total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+    </script>
+    
+</body>
+</html>
