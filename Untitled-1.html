@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Multifuncional</title>
+</head>
+<style>
+ /* === Estilos Gerais === */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* === Container Principal === */
+.container {
+    width: 450px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+/* === Cabeçalhos === */
+h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+/* === Inputs === */
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    font-size: 13px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+/* === Tabela === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ecf0f1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th {
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 12px;
+}
+
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #bdc3c7;
+}
+
+/* === Botão de Adicionar Calculadora === */
+button {
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    font-size: 24px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background: #2980b9;
+    transform: scale(1.1);
+}
+
+/* === Resultado e Valor Total === */
+.result {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: right;
+    color: #2c3e50;
+}
+
+#valorTotal {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    background-color: #dff9fb;
+    padding: 12px 0;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    bottom: 0;
+    box-shadow: 0px -2px 5px rgba(245, 2, 2, 0.1);
+    color: red;
+}
+
+/* === Rodapé === */
+footer {
+    position: absolute;
+    text-align: center;
+    color: #7f8c8d;
+    bottom: 0;
+}
+
+
+</style>
+<body>
+    <div id="calculadoras" class="container">
+        <h1>Calculadora Multifuncional</h1>
+        <label for="banco">Banco:</label>
+        <input type="search" id="banco" placeholder="Nome do Banco">
+        <input type="search" id="banco" placeholder="Nova ou Dila">
+        
+        <!-- Calculadora de Valor Total de Cédulas -->
+        <table>
+            <tr>
+                <th>Notas</th>
+                <th>Quantidade</th>
+                <th>Valor</th>
+            </tr>
+            <tr>
+                <td>R$ 2,00</td>
+                <td><input id="quantidade_cedulas_2" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_2">R$ 0,00</span></td>
+            </tr>
+            <tr>
+                <td>R$ 5,00</td>
+                <td><input id="quantidade_cedulas_5" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_5">R$ 0,00</span></td>
+            </tr>
+            <tr>
+                <td>R$ 10,00</td>
+                <td><input id="quantidade_cedulas_10" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_10">R$ 0,00</span></td>
+            </tr>
+            <tr>
+                <td>R$ 20,00</td>
+                <td><input id="quantidade_cedulas_20" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_20">R$ 0,00</span></td>
+            </tr>
+            <tr>
+                <td>R$ 50,00</td>
+                <td><input id="quantidade_cedulas_50" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_50">R$ 0,00</span></td>
+            </tr>
+            <tr>
+                <td>R$ 100,00</td>
+                <td><input id="quantidade_cedulas_100" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_100">R$ 0,00</span></td>
+            </tr>
+            <tr>
+                <td>R$ 200,00</td>
+                <td><input id="quantidade_cedulas_200" type="text" value="0" oninput="calcularTotal(this)"></td>
+                <td><span id="resultado_200">R$ 0,00</span></td>
+            </tr>
+        </table>
+        <div class="result">
+            <div id="subtotal">Sub total: R$ 0,00</div>
+        </div>
+    </div>
+    <button id="adicionarCalculadora">+</button>
+    <div id="valorTotal">Valor Total: R$ 0,00</div>
+    <footer>
+        Desenvolvido por Carlos Oliveira
+    </footer>
+</body>
+<script>
+    let contadorCalculadoras = 1;
+    const maxCalculadoras = 6; // Calculadora inicial + 3 novas
+
+    function formatarQuantidade(input) {
+        let valor = input.value.replace(/\D/g, '');
+        input.value = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    function calcularTotal(input) {
+        const container = input.closest('.container');
+        formatarQuantidade(input);
+        const valores = {
+            2: parseInt(container.querySelector('#quantidade_cedulas_2').value.replace(/\./g, '')) || 0,
+            5: parseInt(container.querySelector('#quantidade_cedulas_5').value.replace(/\./g, '')) || 0,
+            10: parseInt(container.querySelector('#quantidade_cedulas_10').value.replace(/\./g, '')) || 0,
+            20: parseInt(container.querySelector('#quantidade_cedulas_20').value.replace(/\./g, '')) || 0,
+            50: parseInt(container.querySelector('#quantidade_cedulas_50').value.replace(/\./g, '')) || 0,
+            100: parseInt(container.querySelector('#quantidade_cedulas_100').value.replace(/\./g, '')) || 0,
+            200: parseInt(container.querySelector('#quantidade_cedulas_200').value.replace(/\./g, '')) || 0
+        };
+
+        const totais = {
+            2: valores[2] * 2,
+            5: valores[5] * 5,
+            10: valores[10] * 10,
+            20: valores[20] * 20,
+            50: valores[50] * 50,
+            100: valores[100] * 100,
+            200: valores[200] * 200
+        };
+
+        const subtotal = totais[2] + totais[5] + totais[10] + totais[20] + totais[50] + totais[100] + totais[200];
+
+        container.querySelector('#resultado_2').innerText = `R$ ${totais[2].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        container.querySelector('#resultado_5').innerText = `R$ ${totais[5].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        container.querySelector('#resultado_10').innerText = `R$ ${totais[10].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        container.querySelector('#resultado_20').innerText = `R$ ${totais[20].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        container.querySelector('#resultado_50').innerText = `R$ ${totais[50].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        container.querySelector('#resultado_100').innerText = `R$ ${totais[100].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        container.querySelector('#resultado_200').innerText = `R$ ${totais[200].toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        container.querySelector('#subtotal').innerText = `Subtotal: R$ ${subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+        calcularValorTotal();
+    }
+
+    function calcularValorTotal() {
+        let valorTotal = 0;
+        document.querySelectorAll('.container').forEach(container => {
+            const subtotal = parseFloat(container.querySelector('#subtotal').innerText.replace(/[^0-9,]/g, '').replace(',', '.')) || 0;
+            valorTotal += subtotal;
+        });
+        document.getElementById('valorTotal').innerText = `Valor Total: R$ ${valorTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+
+    function adicionarEventosCalculo(container) {
+        container.querySelectorAll('input[type="text"]').forEach(input => {
+            input.addEventListener('input', function() {
+                calcularTotal(this);
+            });
+        });
+    }
+
+    document.getElementById('adicionarCalculadora').addEventListener('click', () => {
+        if (contadorCalculadoras < maxCalculadoras) {
+            const novaCalculadora = document.querySelector('.container').cloneNode(true);
+            novaCalculadora.querySelectorAll('input[type="text"]').forEach(input => {
+                input.value = "";
+            });
+            novaCalculadora.querySelector('#subtotal').innerText = "Subtotal: R$ 0,00";
+            document.body.insertBefore(novaCalculadora, document.getElementById('adicionarCalculadora'));
+            adicionarEventosCalculo(novaCalculadora);
+            contadorCalculadoras++;
+        } else {
+            alert('Máximo de 6 calculadoras atingido.');
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        adicionarEventosCalculo(document.querySelector('.container'));
+    });
+</script>
+</html>
