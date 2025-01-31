@@ -61,6 +61,21 @@
             color: #d9534f;
             text-align: center;
         }
+
+        #valorTotal {
+        position: absolute;
+        width: 20%;
+        text-align: center;
+        background-color: #dff9fb;
+        padding: 12px 0;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 8px;
+        bottom: 0;
+        box-shadow: 0px -2px 5px rgba(245, 2, 2, 0.1);
+        color: #d9534f;
+        margin-right: 250px;
+        }
         footer {
             text-align: center;
             margin-top: 20px;
@@ -129,9 +144,6 @@
             <div class="result">
                 <p id="resultadoTotal"></p>
             </div>
-            <footer>
-                Calculadora de Valor Total de Cédulas 1
-            </footer>
         </div>
 
         <!-- Segunda Calculadora -->
@@ -192,47 +204,49 @@
             <div class="result">
                 <p id="resultadoTotal_2"></p>
             </div>
-            <footer>
-                Calculadora de Valor Total de Cédulas 2
-            </footer>
+
+            <div class="result"> <p id="resultadoTotalCombinado"></p></div>
+            <div id="valorTotal">Valor Total: R$ 0,00</div>
         </div>
     </div>
 
     <script>
         function calcularTotal1() {
             var valores = [2, 5, 10, 20, 50, 100, 200];
-            var quantidades = {2: 1500, 5: 2000, 10: 2000, 20: 1500, 50: 2000, 100: 2000, 200: 1200};
+            var quantidades1 = {2: 1500, 5: 2000, 10: 2000, 20: 1500, 50: 2000, 100: 2000, 200: 1200};
             var total = 0;
-    
             valores.forEach(function(valor) {
-                var qtdCedulas = quantidades[valor];
+                var qtdCedulas = quantidades1[valor];
                 var qtdCassetes = parseInt(document.getElementById("qtdCassetes" + valor).value) || 0;
                 var subtotal = valor * qtdCedulas * qtdCassetes;
                 total += subtotal;
-    
                 document.getElementById("resultado" + valor).textContent = "R$ " + subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             });
-    
             document.getElementById("resultadoTotal").textContent = "Total: R$ " + total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            calcularTotalCombinado(); // Chama a função de total combinado
         }
-    
+
         function calcularTotal2() {
             var valores = [2, 5, 10, 20, 50, 100, 200];
-            var quantidades = {2: 1500, 5: 2200, 10: 2200, 20: 1500, 50: 2400, 100: 2400, 200: 1200};
+            var quantidades2 = {2: 1500, 5: 2200, 10: 2200, 20: 1500, 50: 2400, 100: 2400, 200: 1200};
             var total = 0;
-    
             valores.forEach(function(valor) {
-                var qtdCedulas = quantidades[valor];
+                var qtdCedulas = quantidades2[valor];
                 var qtdCassetes = parseInt(document.getElementById("qtdCassetes" + valor + "_2").value) || 0;
                 var subtotal = valor * qtdCedulas * qtdCassetes;
                 total += subtotal;
-    
                 document.getElementById("resultado" + valor + "_2").textContent = "R$ " + subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             });
-    
             document.getElementById("resultadoTotal_2").textContent = "Total: R$ " + total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            calcularTotalCombinado(); // Chama a função de total combinado
+        }
+
+        function calcularTotalCombinado() {
+            var total1 = parseFloat(document.getElementById("resultadoTotal").textContent.replace("Total: R$ ", "").replace(".", "").replace(",", "."));
+            var total2 = parseFloat(document.getElementById("resultadoTotal_2").textContent.replace("Total: R$ ", "").replace(".", "").replace(",", "."));
+            var valorCombinado = (total1 + total2);
+            document.getElementById("valorTotal").textContent = "Valor Total: R$ " + valorCombinado.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
     </script>
-    
 </body>
 </html>
