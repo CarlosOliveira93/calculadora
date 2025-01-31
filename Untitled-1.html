@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Multifuncional</title>
 </head>
 <style>
  /* === Estilos Gerais === */
@@ -19,7 +18,7 @@ body {
 
 /* === Container Principal === */
 .container {
-    width: 450px;
+    width: 390px;
     background: #ffffff;
     padding: 25px;
     border-radius: 12px;
@@ -39,7 +38,7 @@ h1, h2 {
 
 /* === Inputs === */
 input[type="text"] {
-    width: 100%;
+    width: 97%;
     padding: 12px;
     border: 2px solid #bdc3c7;
     border-radius: 8px;
@@ -59,18 +58,18 @@ table {
     width: 100%;
     border-collapse: collapse;
     background: #ecf0f1;
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
 }
 
 table th {
     background-color: #3498db;
     color: #ffffff;
-    padding: 12px;
+    padding: 10px;
 }
 
 table td {
-    padding: 12px;
+    padding: 3px;
     text-align: left;
     border-bottom: 1px solid #bdc3c7;
 }
@@ -83,10 +82,10 @@ button {
     border-radius: 50%;
     width: 55px;
     height: 55px;
-    font-size: 24px;
+    font-size: 25px;
     cursor: pointer;
     display: block;
-    margin: 20px auto;
+    margin: 0;
     transition: background 0.3s, transform 0.2s;
 }
 
@@ -100,7 +99,9 @@ button:hover {
     font-weight: bold;
     font-size: 18px;
     text-align: right;
-    color: #2c3e50;
+    color: #fa1302;
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
 #valorTotal {
@@ -116,6 +117,61 @@ button:hover {
     box-shadow: 0px -2px 5px rgba(245, 2, 2, 0.1);
     color: red;
 }
+input {
+    padding: 13px;
+    width: 25%;
+    margin-bottom: 10px;
+}
+
+label[for="banco"] {
+    font-size: 13px; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    color: #2c3e50; /* Cor do texto */
+    letter-spacing: 0px; /* Espaçamento entre letras */
+    margin-bottom: 6px; /* Espaçamento abaixo do label */
+}
+
+label[for="boa"] {
+    font-size: 13px; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    color: #2c3e50; /* Cor do texto */
+    letter-spacing: 0px; /* Espaçamento entre letras */
+    margin-bottom: 6px; /* Espaçamento abaixo do label */
+    margin-right: 0px;
+}
+
+label[for="dilacerada"] {
+    font-size: 13px; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    color: #2c3e50; /* Cor do texto */
+    letter-spacing: 0px; /* Espaçamento entre letras */
+    margin-bottom: 6px; /* Espaçamento abaixo do label */
+    margin-right: 0px;
+}
+input[type="checkbox"] {
+    margin-left: 0px; /* Reduz o espaço entre o checkbox e o label */
+    transform: scale(1.1); /* Aumenta ligeiramente o tamanho do checkbox */
+    vertical-align: middle; /* Alinha verticalmente com o texto */
+}
+
+.removerCalculadora {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 3px;
+    margin-left: 350px;
+    transition: background-color 0.3s;
+    
+}
+
+.removerCalculadora:hover {
+    background-color: #c0392b;
+}
 
 /* === Rodapé === */
 footer {
@@ -123,16 +179,42 @@ footer {
     text-align: center;
     color: #7f8c8d;
     bottom: 0;
+    padding: 0;
+    
 }
 
 
 </style>
 <body>
     <div id="calculadoras" class="container">
-        <h1>Calculadora Multifuncional</h1>
+        <button class="removerCalculadora">X</button>
+        <h1>Calculadora de Cédulas</h1>
         <label for="banco">Banco:</label>
-        <input type="search" id="banco" placeholder="Nome do Banco">
-        <input type="search" id="banco" placeholder="Nova ou Dila">
+        <select id="banco">
+            <option value="" disabled selected>Selecione um banco</option>
+            <option value="bradesco">Bradesco</option>
+            <option value="caixa">Caixa</option>
+            <option value="itau">Itaú</option>
+            <option value="santander">Santander</option>
+            <option value="banco_do_brasil">Banco do Brasil</option>
+        </select>
+        <select id="milheiro">
+            <option value="" disabled selected>Opção</option>
+            <option value="bradesco">Milheiro</option>
+            <option value="bradesco">Centenas</option>
+            <option value="caixa">Resido</option>
+            <option value="caixa">Bancada</option>
+            <option value="caixa">Gaiola</option>
+            </select>
+            
+<div>
+    <label for="banco">Condição:</label>
+    <input type="checkbox" id="boa" name="condicao" value="Novas">
+    <label for="boa">Novas</label>
+
+    <input type="checkbox" id="dilacerada" name="condicao" value="dilacerada">
+    <label for="dilacerada">Dilacerada</label>
+</div>
         
         <!-- Calculadora de Valor Total de Cédulas -->
         <table>
@@ -189,7 +271,7 @@ footer {
 </body>
 <script>
     let contadorCalculadoras = 1;
-    const maxCalculadoras = 6; // Calculadora inicial + 3 novas
+    const maxCalculadoras = 6; 
 
     function formatarQuantidade(input) {
         let valor = input.value.replace(/\D/g, '');
@@ -257,6 +339,19 @@ footer {
                 input.value = "";
             });
             novaCalculadora.querySelector('#subtotal').innerText = "Subtotal: R$ 0,00";
+            novaCalculadora.querySelectorAll('input[type="text"]').forEach(input => {
+            input.value = "";
+        });
+        novaCalculadora.querySelector('#subtotal').innerText = "Subtotal: R$ 0,00";
+        
+        // Adiciona o botão de remover
+        const removerBtn = novaCalculadora.querySelector('.removerCalculadora');
+        removerBtn.addEventListener('click', () => {
+            novaCalculadora.remove(); // Remove a calculadora
+            contadorCalculadoras--; // Decrementa o contador
+            calcularValorTotal(); // Atualiza o valor total
+        });
+
             document.body.insertBefore(novaCalculadora, document.getElementById('adicionarCalculadora'));
             adicionarEventosCalculo(novaCalculadora);
             contadorCalculadoras++;
