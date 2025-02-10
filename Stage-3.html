@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+ /* === Estilos Gerais === */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* === Container Principal === */
+.container {
+    width: 460px;
+    background: #ffffff;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+/* === Cabeçalhos === */
+h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+/* === Inputs === */
+input[type="text"] {
+    width: 97%;
+    padding: 12px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    font-size: 13px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #212425;
+    outline: none;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+/* === Tabela === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ecf0f1;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table th {
+    background-color: #313b42e5;
+    color: #ffffff;
+    padding: 10px;
+}
+
+table td {
+    padding: 2px;
+    text-align: left;
+    border-bottom: 1px solid #bdc3c7;
+}
+
+/* === Botão de Adicionar Calculadora === */
+#adicionarCalculadora {
+    background: #333e46;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    font-size: 25px;
+    cursor: pointer;
+    display: block;
+    margin: 0;
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background: #c51212;
+    transform: scale(1.1);
+}
+
+/* === Resultado e Valor Total === */
+.result {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: right;
+    color: #fa1302;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+#valorTotal {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    background-color: #dff9fb;
+    padding: 22px 0;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    bottom: 0;
+    box-shadow: 0px -2px 5px rgba(245, 2, 2, 0.1);
+    color: red;
+}
+input {
+    padding: 13px;
+    width: 25%;
+    margin-bottom: 10px;
+}
+
+label[for="banco"] {
+    position: relative;
+    font-size: 18px; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    color: #2c3e50; /* Cor do texto */
+    letter-spacing: 0px; /* Espaçamento entre letras */
+    scroll-margin-top: 10px; /* Espaçamento abaixo do label */
+}
+
+label[for="boa"] {
+    position: relative;
+    font-size: 18px; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    color: #2c3e50; /* Cor do texto */
+    left: -50px;
+}
+
+label[for="dilacerada"] {
+    position: relative;
+    font-size: 18px; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    color: #2c3e50; /* Cor do texto */
+    letter-spacing: 0px; /* Espaçamento entre letras */
+    margin-bottom: 6px; /* Espaçamento abaixo do label */
+    margin-right: 0px;
+    left: -50px;
+}
+input[type="checkbox"] {
+    position: relative;
+    margin-left: 0px; /* Reduz o espaço entre o checkbox e o label */
+    transform: scale(1.4); /* Aumenta ligeiramente o tamanho do checkbox */
+    vertical-align: middle; /* Alinha verticalmente com o texto */
+}
+
+button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background-color 0.3s;
+    position: absolute; /* Posicionamento absoluto */
+    bottom: 10px; /* Distância da parte inferior */
+    right:20px; /* Distância do lado direito */
+    top: 20px;
+    ;
+}
+
+.removerCalculadora:hover {
+    background-color: #c0392b;
+}
+h3 {
+    position: relative;
+    position: center;
+    bottom: 40px; /* Move para baixo */
+    left: 160px; /* Move para a direita */
+    color: #2c3e50;
+}
+
+h2{
+    position: relative;
+    color: #2c3e50;
+    bottom: 70px;
+}
+/* === Rodapé === */
+footer {
+    position: absolute;
+    text-align: center;
+    color: #2e2e31;
+    bottom: 0;
+    padding: 5px;
+        
+}
+
+select { 
+    position: relative;
+    font-size: 20   px;
+    bottom: 3px;
+    padding: 0;
+}
+.input-total{
+    position: relative;
+    bottom: 24px;
+    padding: 0;
+    width: 50%;
+    height: 0;
+}
+
+#mensagem-banco {
+    display: block;
+    text-align: center;
+    position: relative;
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(241, 2, 2);
+    bottom: 117px;
+    left: 0px;
+
+
+}
+
+
+</style>
+<body>
+    <div id="calculadoras" class="container">
+        <img src="https://www.tbforte.com.br/images/logo-tb-forte.png" alt="Logo da Empresa" width="120" style="margin-top: -30px;">
+        <h3>DATA: <span id="data"></span></h3>
+        <span id="mensagem-banco"></span>
+        <label for="banco">Banco:</label>
+        <select id="banco">
+            <option value="" >Selecione um banco</option>
+            <option value="bradesco">Bradesco</option>
+            <option value="caixa">Caixa</option>
+            <option value="itau">Itaú</option>
+            <option value="santander">Santander</option>
+            <option value="24Horas">24 Horas</option>
+        </select>
+        <select id="Opcão1">
+            <option value="" disabled selected>Opção1</option>
+            <option value="caixa">Bancada</option>
+            <option value="caixa">Gaiola</option>
+            <option value="caixa">Cofre</option>
+            <option value="caixa">Custodia</option>
+            <option value="caixa">Remessa</option>
+            </select>
+            <label for="tipoCalculo"></label>
+            <select id="tipoCalculo">
+            <option value="Normal">Residuos</option>
+            <option value="Milheiros">Milheiros</option>
+            <option value="Centenas">Centenas</option>
+        </select>
+            
+<div>
+    <label for="banco">Condição:</label>
+    <input type="checkbox" id="boa" name="condicao" value="Novas">
+    <label for="boa">Boas</label>
+
+    <input type="checkbox" id="dilacerada" name="condicao" value="dilacerada">
+    <label for="dilacerada">Dilas</label>
+</div>
+        
+        <!-- Calculadora de Valor Total de Cédulas -->
+        <table>
+            <tr>
+                <th>Notas</th>
+                <th>QTD</th>
+                <th>Valor</th>
+            </tr>
+            <!-- Para as cédulas antigas -->
+            <tr>
+                <td>R$ 1,00</td>
+                <td><input id="quantidade_cedulas_1" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_1">R$ 0,00</span></td>
+            </tr>
+            <tr>
+                <td>R$ 2,00</td>
+                <td><input id="quantidade_cedulas_2" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_2">R$ 0,00</span></td>
+            </tr>
+
+            <!-- Para as cédulas novas -->
+            <tr>
+                <td>R$ 2,00N</td>
+                <td><input id="quantidade_cedulas_2N" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_2N">R$ 0,00</span></td>
+            </tr>
+
+            <!-- Para as cédulas antigas de R$ 5,00 -->
+            <tr>
+                <td>R$ 5,00 </td>
+                <td><input id="quantidade_cedulas_5" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_5">R$ 0,00</span></td>
+            </tr>
+
+            <!-- Para as cédulas novas de R$ 5,00 -->
+            <tr>
+                <td>R$ 5,00N</td>
+                <td><input id="quantidade_cedulas_5N" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_5N">R$ 0,00</span></td>
+            </tr>
+
+            <tr>
+                <td>R$ 10,00</td>
+                <td><input id="quantidade_cedulas_10" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_10">R$ 0,00</span></td>
+            </tr>
+
+            <tr>
+                <td>R$ 10,00N</td>
+                <td><input id="quantidade_cedulas_10N" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_10N">R$ 0,00</span></td>
+            </tr>
+
+            <tr>
+                <td>R$ 20,00</td>
+                <td><input id="quantidade_cedulas_20" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_20">R$ 0,00</span></td>
+            </tr>
+
+            <tr>
+                <td>R$ 20,00N</td>
+                <td><input id="quantidade_cedulas_20N" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_20N">R$ 0,00</span></td>
+            </tr>
+
+            <tr>
+                <td>R$ 50,00</td>
+                <td><input id="quantidade_cedulas_50" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_50">R$ 0,00</span></td>
+            </tr>
+
+            <tr>
+                <td>R$ 50,00N</td>
+                <td><input id="quantidade_cedulas_50N" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_50N">R$ 0,00</span></td>
+            </tr>
+
+            <tr>
+                <td>R$ 100,00</td>
+                <td><input id="quantidade_cedulas_100" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_100">R$ 0,00</span></td>
+            </tr>
+
+            <tr>
+                <td>R$ 100,00N</td>
+                <td><input id="quantidade_cedulas_100N" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_100N">R$ 0,00</span></td>
+            </tr>
+
+            <tr>
+                <td>R$ 200,00N</td>
+                <td><input id="quantidade_cedulas_200N" type="text" value="0" oninput="calcularTotal()"></td>
+                <td><span id="resultado_200N">R$ 0,00</span></td>
+            </tr>
+
+        </table>
+
+        <div class="result">
+            <div id="subtotal">Sub total: R$ 0,00</div>
+        </div>
+        <div class="input-total">
+            <input type="text" id="input-total" placeholder="Digite o total" />
+        </div>
+        
+    </div>
+    <div id="valorTotal">Valor Total: R$ 0,00</div>
+
+    <button id="adicionarCalculadora">+</button>
+    <footer>
+        Desenvolvido por Carlos Oliveira
+    </footer>
+    <script>
+        let contadorCalculadoras = 0;
+        const maxCalculadoras = 10;
+    
+        // Função para calcular o total de uma calculadora
+      // Função para calcular o total e o subtotal
+    function calcularTotal(calculadora) {
+    let tipoCalculo = calculadora.querySelector("#tipoCalculo").value;
+
+    // Quantidade de cédulas antigas e novas
+    let valores = {
+        1:{ antiga: parseInt(calculadora.querySelector("#quantidade_cedulas_1").value) || 0,},
+        2: { antiga: parseInt(calculadora.querySelector("#quantidade_cedulas_2").value) || 0, nova: parseInt(calculadora.querySelector("#quantidade_cedulas_2N").value) || 0 },
+        5: { antiga: parseInt(calculadora.querySelector("#quantidade_cedulas_5").value) || 0, nova: parseInt(calculadora.querySelector("#quantidade_cedulas_5N").value) || 0 },
+        10: { antiga: parseInt(calculadora.querySelector("#quantidade_cedulas_10").value) || 0, nova: parseInt(calculadora.querySelector("#quantidade_cedulas_10N").value) || 0 },
+        20: { antiga: parseInt(calculadora.querySelector("#quantidade_cedulas_20").value) || 0, nova: parseInt(calculadora.querySelector("#quantidade_cedulas_20N").value) || 0 },
+        50: { antiga: parseInt(calculadora.querySelector("#quantidade_cedulas_50").value) || 0, nova: parseInt(calculadora.querySelector("#quantidade_cedulas_50N").value) || 0 },
+        100: { antiga: parseInt(calculadora.querySelector("#quantidade_cedulas_100").value) || 0, nova: parseInt(calculadora.querySelector("#quantidade_cedulas_100N").value) || 0 },
+        200: { nova: parseInt(calculadora.querySelector("#quantidade_cedulas_200N").value) || 0 }
+    };
+
+    let totais = {};
+
+    // Calculando os totais das cédulas antigas e novas
+    for (let valorCedula in valores) {
+        let quantidadeAntiga = valores[valorCedula].antiga;
+        let quantidadeNova = valores[valorCedula].nova;
+        let valorCedulaInt = parseInt(valorCedula);
+
+        if (tipoCalculo === "Milheiros") {
+            totais[`${valorCedula}_antiga`] = quantidadeAntiga * valorCedulaInt * 1000;
+            totais[`${valorCedula}_nova`] = quantidadeNova * valorCedulaInt * 1000;
+        } else if (tipoCalculo === "Centenas") {
+            totais[`${valorCedula}_antiga`] = quantidadeAntiga * valorCedulaInt * 100;
+            totais[`${valorCedula}_nova`] = quantidadeNova * valorCedulaInt * 100;
+        } else {
+            totais[`${valorCedula}_antiga`] = quantidadeAntiga * valorCedulaInt;
+            totais[`${valorCedula}_nova`] = quantidadeNova * valorCedulaInt;
+        }
+    }
+
+    // Atualizando os valores no HTML
+    calculadora.querySelector("#resultado_1").innerText = `R$ ${totais["1_antiga"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    calculadora.querySelector("#resultado_2").innerText = `R$ ${totais["2_antiga"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    calculadora.querySelector("#resultado_2N").innerText = `R$ ${totais["2_nova"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    calculadora.querySelector("#resultado_5").innerText = `R$ ${totais["5_antiga"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    calculadora.querySelector("#resultado_5N").innerText = `R$ ${totais["5_nova"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    calculadora.querySelector("#resultado_10").innerText = `R$ ${totais["10_antiga"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    calculadora.querySelector("#resultado_10N").innerText = `R$ ${totais["10_nova"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    calculadora.querySelector("#resultado_20").innerText = `R$ ${totais["20_antiga"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    calculadora.querySelector("#resultado_20N").innerText = `R$ ${totais["20_nova"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    calculadora.querySelector("#resultado_50").innerText = `R$ ${totais["50_antiga"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    calculadora.querySelector("#resultado_50N").innerText = `R$ ${totais["50_nova"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    calculadora.querySelector("#resultado_100").innerText = `R$ ${totais["100_antiga"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    calculadora.querySelector("#resultado_100N").innerText = `R$ ${totais["100_nova"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    calculadora.querySelector("#resultado_200N").innerText = `R$ ${totais["200_nova"].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+
+    // Calculando o subtotal
+    let inputTotal = parseFloat(calculadora.querySelector("#input-total").value) || 0;
+    let subtotal = totais["1_antiga"] + totais["2_antiga"] + totais["2_nova"] + totais["5_antiga"] + totais["5_nova"] + totais["10_antiga"] + totais["10_nova"]
+        + totais["20_antiga"] + totais["20_nova"] + totais["50_antiga"] + totais["50_nova"] + totais["100_antiga"] + totais["100_nova"]
+        + totais["200_nova"] + inputTotal;
+
+    // Atualizando o subtotal no HTML
+    calculadora.querySelector("#subtotal").innerText = `Subtotal: R$ ${subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+
+    // Atualizando o valor total geral
+    calcularValorTotal();
+}
+
+// Função para calcular o total geral
+function calcularValorTotal() {
+    let totalGeral = 0;
+    document.querySelectorAll('.container').forEach(calculadora => {
+        let subtotal = parseFloat(calculadora.querySelector("#subtotal").innerText.replace('Subtotal: R$ ', '').replace('.', '').replace(',', '.'));
+        totalGeral += subtotal;
+    });
+
+    document.getElementById("valorTotal").innerText = `Valor Total: R$ ${totalGeral.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+}
+
+// Função para adicionar eventos de cálculo a uma calculadora
+function adicionarEventosCalculo(calculadora) {
+    calculadora.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', () => calcularTotal(calculadora));
+    });
+    calculadora.querySelector('#tipoCalculo').addEventListener('change', () => calcularTotal(calculadora));
+}
+
+// Função para clonar a calculadora
+document.getElementById('adicionarCalculadora').addEventListener('click', () => {
+    if (contadorCalculadoras < maxCalculadoras) {
+        const novaCalculadora = document.querySelector('.container').cloneNode(true);
+
+        // Limpa os campos de entrada
+        novaCalculadora.querySelectorAll('input').forEach(input => input.value = '');
+
+        // Limpa o subtotal
+        novaCalculadora.querySelector('#subtotal').innerText = "Subtotal: R$ 0,00";
+
+        // Adiciona o botão de remover
+        const removerBtn = document.createElement('button');
+        removerBtn.innerText = 'X';
+        removerBtn.addEventListener('click', () => {
+            novaCalculadora.remove();
+            contadorCalculadoras--;
+            calcularValorTotal();
+        });
+        novaCalculadora.style.position = 'relative';
+        novaCalculadora.appendChild(removerBtn);
+
+        // Adiciona a nova calculadora ao corpo do documento
+        document.body.insertBefore(novaCalculadora, document.getElementById('adicionarCalculadora'));
+
+        // Adiciona os eventos de cálculo à nova calculadora clonada
+        adicionarEventosCalculo(novaCalculadora);
+
+        contadorCalculadoras++;
+    } else {
+        alert('Máximo de calculadoras atingido.');
+    }
+});
+
+// Inicializa a primeira calculadora ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+    let calculadora = document.querySelector('.container');
+    if (calculadora) {
+        adicionarEventosCalculo(calculadora);
+        calcularTotal(calculadora); // Calcula os valores iniciais
+    }
+});
+    
+        // Função para mostrar a data atual
+        function mostrarData() {
+            let dataAtual = new Date();
+            let dataFormatada = dataAtual.toLocaleDateString('pt-BR');
+            document.getElementById("data").textContent = dataFormatada;
+        }
+    
+        // Mostra a data ao carregar a página
+        mostrarData();
+
+                document.getElementById("banco").addEventListener("change", function() {
+            const bancoSelecionado = this.value; // Obtém o valor da opção selecionada
+            const mensagemBanco = document.getElementById("mensagem-banco");
+            
+            if (bancoSelecionado) {
+                // Exibe a mensagem com o nome do banco selecionado
+                mensagemBanco.textContent = `Banco: ${bancoSelecionado.charAt(0).toUpperCase() + bancoSelecionado.slice(1).replace(/_/g, ' ')}`;
+            } else {
+                // Caso não tenha seleção, limpa a mensagem
+                mensagemBanco.textContent = '';
+            }
+            
+        });
+
+            
+    </script>
+    
+</html>
