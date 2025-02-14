@@ -14,19 +14,21 @@ body {
     height: 100vh;
     margin: 0;
     flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 /* === Container Principal === */
 .container {
-    width: 460px;
+    width: 100%;
+    max-width: 460px;
     background: #ffffff;
-    padding: 50px;
+    padding: 20px;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
-    margin: 10px; /* Adiciona espaço entre as calculadoras */
+    margin: 20px; /* Adiciona espaço entre as calculadoras */
     position: relative; /* Adiciona posição relativa para o botão de remover */
-    
 }
 
 .container:hover {
@@ -41,7 +43,7 @@ h1, h2 {
 
 /* === Inputs === */
 input[type="text"] {
-    width: 97%;
+    width: 100%;
     padding: 12px;
     border: 2px solid #bdc3c7;
     border-radius: 8px;
@@ -76,6 +78,7 @@ table td {
     text-align: left;
     border-bottom: 1px solid #bdc3c7;
 }
+
 #valorTotal {
     color: red;
     cursor: pointer;
@@ -90,7 +93,7 @@ table td {
     font-weight: bold;
     border-radius: 8px;
     box-shadow: 0px -2px 5px rgba(245, 2, 2, 0.1);
-    bottom: 1200px; /* Espaço acima do botão de adicionar calculadora */
+    bottom: 90px; /* Espaço acima do botão de adicionar calculadora */
     right: 20px; /* Alinhado à direita */
     transition: background 0.3s, transform 0.2s;
 }
@@ -109,7 +112,7 @@ table td {
     margin: 0;
     transition: background 0.3s, transform 0.2s;
     position: fixed; /* Fixa o botão na tela */
-    bottom: 20px; /* Distância da parte inferior */
+    bottom: 1200px; /* Distância da parte inferior */
     right: 20px; /* Distância do lado direito */
 }
 
@@ -166,6 +169,7 @@ label[for="dilacerada"] {
     margin-right: 0px;
     left: -50px;
 }
+
 input[type="checkbox"] {
     position: relative;
     margin-left: 0px; /* Reduz o espaço entre o checkbox e o label */
@@ -185,15 +189,14 @@ button {
     margin-top: 8px;
     transition: background-color 0.3s;
     position: absolute; /* Posicionamento absoluto */
-    bottom: 10px; /* Distância da parte inferior */
-    right:20px; /* Distância do lado direito */
-    top: 20px;
-    ;
+    bottom: 1080px; /* Distância da parte inferior */
+    right: 20px; /* Distância do lado direito */
 }
 
 .removerCalculadora:hover {
     background-color: #c0392b;
 }
+
 h3 {
     position: relative;
     position: center;
@@ -202,20 +205,20 @@ h3 {
     color: #2c3e50;
 }
 
-h2{
+h2 {
     position: relative;
     color: #2c3e50;
     bottom: 70px;
 }
 
-
-select { 
+select {
     position: relative;
     font-size: 15px;
     bottom: 3px;
     padding: 0;
 }
-.input-total{
+
+.input-total {
     position: relative;
     bottom: 28px;
     padding: 0;
@@ -241,12 +244,47 @@ label[for="condicao"] {
     font-weight: bold; /* Negrito */
     color: #2c3e50; /* Cor do texto */
     letter-spacing: 0px; /* Espaçamento entre letras */
-    scroll-margin-top: 10px; 
-
-
-
+    scroll-margin-top: 10px;
 }
 
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    #valorTotal {
+        width: 100px;
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    #adicionarCalculadora {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    #valorTotal {
+        width: 80px;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    #adicionarCalculadora {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+}
 
 </style>
 <body>
